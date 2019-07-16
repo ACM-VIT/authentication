@@ -8,12 +8,18 @@ router.get('/auth', (req, res, next) => {
         console.log(type);
 
     } else {
-        const state = 'int';
+        var state = 'int';
         console.log('Default:int');
 
     }
     const authenticator = passport.authenticate('google', { scope: ['profile'], state})
     authenticator(req, res, next)
-})
+});
 
 module.exports = router;
+
+
+
+
+
+

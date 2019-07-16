@@ -4,9 +4,10 @@ const cookieSession = require('cookie-session');
 const passport = require('passport');
 const passportSetup = require('./config/passport-setup');
 const keys = require('.//config/keys');
-const authRoutes = require('./routes/auth');
+const auth = require('./routes/auth');
+const callback = require('./routes/callback');
 var { mongoose } = require('./db/mongoose');
-var { ObjectID } = require('mongodb');
+
 
 
 const port = process.env.PORT || 3000;
@@ -19,7 +20,8 @@ app.use(cookieSession({
 
 app.use(passport.initialize());
 app.use(passport.session());
-app.use('', authRoutes);
+app.use('', auth);
+app.use('', callback);
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
