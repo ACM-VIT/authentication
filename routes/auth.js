@@ -1,4 +1,5 @@
 const router = require('express').Router();
+const {getUrl}= require('../config/google-oauth')
 
 router.get('/auth', (req, res) => {
     const type = req.query.type
@@ -11,6 +12,11 @@ router.get('/auth', (req, res) => {
         console.log('Default:int');
 
     }
+    console.log(getUrl(state))
+    res.writeHead(303, {
+        Location: getUrl(state)
+    });
+    res.end();
 });
 
 module.exports = router;
