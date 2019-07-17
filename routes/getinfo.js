@@ -1,5 +1,4 @@
 const router = require('express').Router();
-const passport = require('passport');
 var { ObjectID } = require('mongodb');
 var { IntUsers } = require('../models/intUser');
 var { ExtUsers } = require('../models/extUser');
