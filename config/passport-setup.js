@@ -7,15 +7,15 @@ const ExtUsers = require('../models/extUser');
 
 
 
-passport.serializeUser((user, done) => {
-    done(null, user.id);
-});
+// passport.serializeUser((user, done) => {
+//     done(null, user.id);
+// });
 
-passport.deserializeUser((id, done) => {
-    UserAuth.findById(id).then((user) => {
-        done(null, user);
-    });
-});
+// passport.deserializeUser((id, done) => {
+//     UserAuth.findById(id).then((user) => {
+//         done(null, user);
+//     });
+// });
 
 intTokenGenerate = () => {
     var intuser = new IntUsers();
@@ -46,11 +46,11 @@ passport.use(new GoogleStrategy({
     clientSecret: keys.google.clientSecret
 }, (accessToken, refreshToken, profile, done) => {
 
-    UserAuth.findOne({ googleID: profile.id }).then((currentUser) => {
+    UserAuth.findOne({ googleID: req.profile.id }).then((currentUser) => {
         if (currentUser) {
             if (state == 'int') {
-                if (EmailCheck(profile.email)) {
-                    IntUsers.findOne({ email: profile.email }).then((presentUser) => {
+                if (EmailCheck(req.profile.email)) {
+                    IntUsers.findOne({ email: req.profile.email }).then((presentUser) => {
                         if (presentUser) {
                             intTokenGenerate();
                         }else{
@@ -64,10 +64,13 @@ passport.use(new GoogleStrategy({
                 ExtUsers.findOne({ email: profile.email }).then((presentUser) => {
                     if (presentUser) {
                         extTokenGenerate();
+                    }else{
+                        intTokenGenerate();
+                        res.redirect('/form');
                     }
                 });
             }
-            onsole.log('user is:' + currentUser);
+            console.log('user is:' + currentUser);
             done(null, currentUser);
         }
         else {

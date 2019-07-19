@@ -3,6 +3,7 @@ const validator = require('validator');
 const jwt = require('jsonwebtoken');
 
 var IntUserSchema = new mongoose.Schema({
+    googleID: String,
     name: {
         type: String,
         required: true

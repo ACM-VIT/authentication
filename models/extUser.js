@@ -3,6 +3,7 @@ const validator = require('validator');
 const jwt = require('jsonwebtoken');
 
 var ExtUserSchema = new mongoose.Schema({
+    googleID: String,
     name:{
         type:String,
         required:true
@@ -53,6 +54,7 @@ ExtUserSchema.methods.generateAuthToken = function () {
     })
 
 };
+
 const ExtUsers = mongoose.model('ExtUsers', ExtUserSchema);
 
 module.exports = { ExtUsers };
