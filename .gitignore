@@ -1,2 +1,3 @@
 node_modules/
-passport-setup.js
+config/passport-setup.js
+models/user-auth.js
