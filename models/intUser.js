@@ -16,11 +16,16 @@ var IntUserSchema = new mongoose.Schema({
     phno: {
         type: String,
         required: true,
-        unique: true
+        unique: true,
+        default: ''
     },
     hostelRoom: {
         type: String,
-        required: true
+        required: true,
+        default: ''
+    },
+    refreshToken: {
+        type: String
     },
     email: {
         type: String,
@@ -46,14 +51,16 @@ var IntUserSchema = new mongoose.Schema({
 
 });
 
-IntUserSchema.methods.generateAuthToken = function () {
-    var user = this;
+IntUserSchema.methods.generateAuthToken = function (user) {
+    // var user = this;
     var access = 'auth';
     var data = {
-        _id:user._id.toHexString()
+        // _id: user._id.toHexString(),
+        email:user.email,
+        regno:user.regno
     }
     var token = jwt.sign(data, 'abc123').toString();
-    this.tokens.push({ access, token });
+    user.tokens.push({ access, token });
     return user.save().then(() => {
         return token;
     })

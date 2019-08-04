@@ -2,80 +2,84 @@ const router = require('express').Router();
 const { exchangeCode } = require('../config/google-oauth');
 const { ExtUsers } = require('../models/extUser');
 const { IntUsers } = require('../models/intUser');
-const { UserAuth } = require('../models/user-auth');
 
-intTokenGenerate = () => {
-    var intuser = new IntUsers();
-    intuser.save().then(() => {
-        return intuser.generateAuthToken();
-    }).then((token) => {
-        res.header('x-auth', token).send(intuser);
-    }).catch((e) => {
-        res.status(400).send(e);
-    });
-};
-extTokenGenerate = () => {
-    var extuser = new ExtUsers();
-    extuser.save().then(() => {
-        return extuser.generateAuthToken();
-    }).then((token) => {
-        res.header('x-auth', token).send(extuser);
-    }).catch((e) => {
-        res.status(400).send(e);
-    });
-}
+
+
+// intTokenGenerate = () => {
+//     var intuser = new IntUsers();
+//     intuser.save().then(() => {
+//         return intuser.generateAuthToken();
+//     }).then((token) => {
+//         res.header('x-auth', token).send(intuser);
+//     }).catch((e) => {
+//         res.status(400).send(e);
+//     });
+// };
+// extTokenGenerate = () => {
+//     var extuser = new ExtUsers();
+//     extuser.save().then(() => {
+//         return extuser.generateAuthToken();
+//     }).then((token) => {
+//         res.header('x-auth', token).send(extuser);
+//     }).catch((e) => {
+//         res.status(400).send(e);
+//     });
+// }
 
 router.get('/callback', exchangeCode, (req, res) => {
     console.log(req.refresh_token);
     var state = req.query.state;
     if (state == 'int') {
         if (!EmailCheck(req.profile.email)) {
-            UserAuth.findOne({ googleID: req.profile.id }).then((currentUser) => {
+            IntUsers.findOne({ googleID: req.profile.id }).then((currentUser) => {
                 if (currentUser) {
-                    IntUsers.findOne({ googleID: req.profile.id }).then((presentUser) => {
-                        if (presentUser) {
-                            intTokenGenerate();
-                        } else {
-                            intTokenGenerate();
-                            res.redirect('/form');
-                        }
-                    })
-                }
-                else {
-                    new UserAuth({
-                        username: req.profile.displayName,
-                        googleID: req.profile.id,
-                        refreshToken: req.refresh_token
-                    }).save().then((newUser) => {
-                        console.log('created a newprofile:' + newUser);
-                    });
-                    intTokenGenerate();
-                    res.redirect('/form');
+                    if (currentUser.hostelRoom != '') {
+                        return currentUser.generateAuthToken();
+                    } else {
+                        currentUser.generateAuthToken();
+                        res.redirect(`/intform?id=${currentUser.generateAuthToken()}`);
+                    }
                 }
             })
         }
-    } else {
-        UserAuth.findOne({ googleID: req.profile.id }).then((currentUser) => {
+        else {
+            new IntUsers({
+                googleID: req.profile.id,
+                refreshToken: req.refresh_token,
+                email: req.profile.email,
+                name: req.profile.displayname
+            }).save().then((newUser) => {
+                console.log('created a newprofile:' + newUser);
+                newUser.generateAuthToken();
+                res.redirect(`/intform?id=${currentUser.generateAuthToken()}`);
+            });
+
+
+        }
+    }
+    else {
+        ExtUsers.findOne({ googleID: req.profile.id }).then((currentUser) => {
             if (currentUser) {
-                ExtUsers.findOne({ googleID: req.profile.id }).then((presentUser) => {
-                    if (presentUser) {
-                        extTokenGenerate();
-                    } else {
-                        extTokenGenerate();
-                        res.redirect('/form');
-                    }
-                })
+                if (currentUser.CollegeName != '') {
+                    return currentUser.generateAuthToken();
+                } else {
+                    currentUser.generateAuthToken();
+                    res.redirect(`/extform?id=${currentUser.generateAuthToken()}`);
+                }
             }
             else {
-                new UserAuth({
-                    username: req.profile.displayName,
+                new ExtUsers({
                     googleID: req.profile.id,
-                    refreshToken: req.refresh_token
+                    refreshToken: req.refresh_token,
+                    email: req.profile.email,
+                    name: req.profile.displayname
                 }).save().then((newUser) => {
                     console.log('created a newprofile:' + newUser);
+                    newUser.generateAuthToken();
+                    res.redirect(`/extform?id=${newUser.generateAuthToken()}`);
                 });
-                extTokenGenerate();
-                res.redirect('/form');
+
+
             }
         })
     }
