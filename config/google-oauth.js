@@ -40,6 +40,7 @@ exchangeCode = async (req, res, next) => {
         })
 
         req.profile = data
+        console.log(req.profile);
         req.refresh_token = body.refresh_token
         next()
     } catch (e) {

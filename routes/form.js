@@ -1,11 +1,13 @@
 const router = require('express').Router();
 
 router.get('/intform', (req, res) => {
-    res.send('intform.html');
+    res.render('intform');
+    
 });
 
 router.get('/extform', (req, res) => {
-    res.send('extform.html');
+    res.render('extform');
+    
 });
 
 module.exports = router;

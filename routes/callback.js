@@ -1,30 +1,7 @@
 const router = require('express').Router();
 const { exchangeCode } = require('../config/google-oauth');
-const { ExtUsers } = require('../models/extUser');
-const { IntUsers } = require('../models/intUser');
-
-
-
-// intTokenGenerate = () => {
-//     var intuser = new IntUsers();
-//     intuser.save().then(() => {
-//         return intuser.generateAuthToken();
-//     }).then((token) => {
-//         res.header('x-auth', token).send(intuser);
-//     }).catch((e) => {
-//         res.status(400).send(e);
-//     });
-// };
-// extTokenGenerate = () => {
-//     var extuser = new ExtUsers();
-//     extuser.save().then(() => {
-//         return extuser.generateAuthToken();
-//     }).then((token) => {
-//         res.header('x-auth', token).send(extuser);
-//     }).catch((e) => {
-//         res.status(400).send(e);
-//     });
-// }
+const ExtUsers = require('../models/extUser');
+const IntUsers = require('../models/intUser');
 
 router.get('/callback', exchangeCode, (req, res) => {
     console.log(req.refresh_token);
@@ -33,7 +10,7 @@ router.get('/callback', exchangeCode, (req, res) => {
         if (!EmailCheck(req.profile.email)) {
             IntUsers.findOne({ googleID: req.profile.id }).then((currentUser) => {
                 if (currentUser) {
-                    if (currentUser.hostelRoom != '') {
+                    if (currentUser.hostelRoom != 'undefined') {
                         return currentUser.generateAuthToken();
                     } else {
                         currentUser.generateAuthToken();
@@ -47,11 +24,12 @@ router.get('/callback', exchangeCode, (req, res) => {
                 googleID: req.profile.id,
                 refreshToken: req.refresh_token,
                 email: req.profile.email,
-                name: req.profile.displayname
+                name: req.profile.name
             }).save().then((newUser) => {
                 console.log('created a newprofile:' + newUser);
                 newUser.generateAuthToken();
                 res.redirect(`/intform?id=${currentUser.generateAuthToken()}`);
+
             });
 
 
@@ -60,7 +38,7 @@ router.get('/callback', exchangeCode, (req, res) => {
     else {
         ExtUsers.findOne({ googleID: req.profile.id }).then((currentUser) => {
             if (currentUser) {
-                if (currentUser.CollegeName != '') {
+                if (currentUser.CollegeName != 'undefined') {
                     return currentUser.generateAuthToken();
                 } else {
                     currentUser.generateAuthToken();
@@ -72,11 +50,12 @@ router.get('/callback', exchangeCode, (req, res) => {
                     googleID: req.profile.id,
                     refreshToken: req.refresh_token,
                     email: req.profile.email,
-                    name: req.profile.displayname
+                    name: req.profile.name
                 }).save().then((newUser) => {
                     console.log('created a newprofile:' + newUser);
                     newUser.generateAuthToken();
                     res.redirect(`/extform?id=${newUser.generateAuthToken()}`);
+
                 });
 
 

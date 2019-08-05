@@ -11,13 +11,13 @@ var ExtUserSchema = new mongoose.Schema({
     CollegeName: {
         type: String,
         required: true,
-        default: ''
+        default: `undefined`
     },
     phno: {
         type: String,
         required: true,
         unique: true,
-        default: ''
+        default: `undefined`
     },
     email: {
         type: String,
@@ -50,9 +50,7 @@ ExtUserSchema.methods.generateAuthToken = function () {
     var user = this;
     var access = 'auth';
     var data = {
-        // _id:user._id.toHexString()
-        email: user.email,
-        regno: user.regno
+        email: user.email
     }
     var token = jwt.sign(data, 'abc123').toString();
     this.tokens.push({ access, token });
@@ -63,5 +61,4 @@ ExtUserSchema.methods.generateAuthToken = function () {
 };
 
 const ExtUsers = mongoose.model('ExtUsers', ExtUserSchema);
-
-module.exports = { ExtUsers };
+module.exports = ExtUsers;

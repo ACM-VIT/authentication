@@ -17,12 +17,12 @@ var IntUserSchema = new mongoose.Schema({
         type: String,
         required: true,
         unique: true,
-        default: ''
+        default: `undefined`
     },
     hostelRoom: {
         type: String,
         required: true,
-        default: ''
+        default: `undefined`
     },
     refreshToken: {
         type: String
@@ -51,16 +51,15 @@ var IntUserSchema = new mongoose.Schema({
 
 });
 
-IntUserSchema.methods.generateAuthToken = function (user) {
-    // var user = this;
+IntUserSchema.statics.generateAuthToken = function () {
+    var user = this;
     var access = 'auth';
     var data = {
-        // _id: user._id.toHexString(),
-        email:user.email,
-        regno:user.regno
+        email: user.email,
+        regno: user.regno
     }
     var token = jwt.sign(data, 'abc123').toString();
-    user.tokens.push({ access, token });
+    this.tokens.push({ access, token });
     return user.save().then(() => {
         return token;
     })
@@ -68,4 +67,5 @@ IntUserSchema.methods.generateAuthToken = function (user) {
 };
 const IntUsers = mongoose.model('IntUsers', IntUserSchema);
 
-module.exports = { IntUsers };
+module.exports = IntUsers;
+
