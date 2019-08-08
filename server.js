@@ -5,6 +5,9 @@ const auth = require('./routes/auth');
 const callback = require('./routes/callback');
 const form = require('./routes/form');
 const ejs = require('ejs');
+const getparinfo = require('./routes/getparinfo');
+const getinfo = require('./routes/getinfo');
+const update=require('./routes/update');
 var { mongoose } = require('./db/mongoose');
 
 
@@ -20,6 +23,9 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use('', auth);
 app.use('', callback);
 app.use('', form);
+app.use('', getparinfo);
+app.use('', getinfo);
+app.use('', update);
 
 app.listen(port, () => {
     console.log(`Server is up at ${port}`);

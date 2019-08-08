@@ -5,7 +5,7 @@ const IntUsers = require('../models/intUser');
 router.get('/intform', (req, res) => {
     var state = req.query.state
     var id = req.query.id
-    res.statusCode = 302;
+    res.statusCode = 302;//partial redirect
     res.setHeader("Location", `/getparinfo?id=${id}&?type=${state}`);
     res.end();
     res.render('intform');
@@ -14,8 +14,11 @@ router.get('/intform', (req, res) => {
 router.get('/extform', (req, res) => {
     var type = req.query.state
     var id = req.query.id
+    res.statusCode = 302;//partial redirect
+    res.setHeader("Location", `/getparinfo?id=${id}&?type=${state}`);
+    res.end();
     res.render('extform');
 });
 
 
-module.exports = { router }
+module.exports = router;
