@@ -13,26 +13,26 @@ router.get('/callback', exchangeCode, (req, res) => {
                     if (currentUser.hostelRoom != 'undefined') {
                         return currentUser.generateAuthToken();
                     } else {
-                        currentUser.generateAuthToken();
-                        res.redirect(`/intform?id=${currentUser.generateAuthToken()}`);
+                        var tkon = currentUser.generateAuthToken();
+                        res.redirect(`/intform?id=${tkon}&?state=${state}`);
                     }
                 }
+                else {
+                    new IntUsers({
+                        googleID: req.profile.id,
+                        refreshToken: req.refresh_token,
+                        email: req.profile.email,
+                        name: req.profile.given_name,
+                        regno: req.profile.family_name
+                    }).save().then((newUser) => {
+                        console.log('created a newprofile:' + newUser);
+                        var tkon = newUser.generateAuthToken();
+                        res.redirect(`/intform?id=${tkon}&?state=${state}`);
+
+                    });
+                }
+
             })
-        }
-        else {
-            new IntUsers({
-                googleID: req.profile.id,
-                refreshToken: req.refresh_token,
-                email: req.profile.email,
-                name: req.profile.name
-            }).save().then((newUser) => {
-                console.log('created a newprofile:' + newUser);
-                newUser.generateAuthToken();
-                res.redirect(`/intform?id=${currentUser.generateAuthToken()}`);
-
-            });
-
-
         }
     }
     else {
@@ -41,8 +41,8 @@ router.get('/callback', exchangeCode, (req, res) => {
                 if (currentUser.CollegeName != 'undefined') {
                     return currentUser.generateAuthToken();
                 } else {
-                    currentUser.generateAuthToken();
-                    res.redirect(`/extform?id=${currentUser.generateAuthToken()}`);
+                    var tkon = currentUser.generateAuthToken();
+                    res.redirect(`/extform?id=${tkon}&?state=${state}`);
                 }
             }
             else {
@@ -53,8 +53,8 @@ router.get('/callback', exchangeCode, (req, res) => {
                     name: req.profile.name
                 }).save().then((newUser) => {
                     console.log('created a newprofile:' + newUser);
-                    newUser.generateAuthToken();
-                    res.redirect(`/extform?id=${newUser.generateAuthToken()}`);
+                    var tkon = newUser.generateAuthToken();
+                    res.redirect(`/extform?id=${tkon}&?state=${state}`);
 
                 });
 
@@ -75,4 +75,3 @@ router.get('/callback', exchangeCode, (req, res) => {
 
 module.exports = router;
 
-//res.send({ state: state, refreshToken: req.refresh_token, profile: req.profile });

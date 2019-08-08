@@ -51,7 +51,7 @@ var IntUserSchema = new mongoose.Schema({
 
 });
 
-IntUserSchema.statics.generateAuthToken = function () {
+IntUserSchema.methods.generateAuthToken = function () {
     var user = this;
     var access = 'auth';
     var data = {
