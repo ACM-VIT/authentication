@@ -13,11 +13,12 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
     <script src="form.js"></script>
+    <script src="getinfo.js"></script>
     <title>Registration</title>
 </head>
 
 <body>
-    <form action="/form">
+    <form action="/intform">
         <div class="col s2">
             <h2 style="text-align:center">Form</h2>
         </div>
@@ -27,7 +28,7 @@
             </center>
         </div>
         <div class="row">
-            <div class="col s15" style="margin-left:40%; margin-right:40%; margin-top:5%">
+            <div class="col s15" style="margin-left:40%; margin-right:40%; margin-top:2%">
                 <div class="input-field inline">
                     <input id="name" type="text" class="validate">
                     <label for="name">FullName</label>
@@ -35,26 +36,26 @@
             </div>
         </div>
         <div class="row">
-            <div class="col s15" style="margin-left:40%; margin-right:40%">
-                <div class="input-field inline" style="width:100%">
-                    <input id="regno" style="display: none" type="text" class="validate">
-                    <label for="regno">Registration Number</label>
+            <div class="col s15" style="margin-left:40%; margin-right:40%; margin-top:1%">
+                <div class="input-field inline">
+                    <input id="regno" type="text" class="validate">
+                    <label for="regno">Registration No.</label>
                 </div>
             </div>
         </div>
         <div class="row">
             <div class="col s15" style="margin-left:40%; margin-right:40%">
                 <div class="input-field inline">
-                    <input id="email" type="email" class="validate">
+                    <input id="email" type="text" class="validate">
                     <label for="email">Email</label>
                 </div>
             </div>
         </div>
         <div class="row">
-            <div class="col s15" style="margin-left:40%; margin-right:40%">
-                <div class="input-field inline" style="width:100%">
-                    <input id="hroom" style="display: none" type="text" class="validate">
-                    <label for="hrrom">Hostel Room</label>
+            <div class="col s15" style="margin-left:40%; margin-right:40%; margin-top:1%">
+                <div class="input-field inline">
+                    <input id="hostelroom" type="text" class="validate">
+                    <label for="hostelroom">Hostel Room</label>
                 </div>
             </div>
         </div>

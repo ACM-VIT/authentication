@@ -10,11 +10,13 @@ router.get('/callback', exchangeCode, (req, res) => {
         if (!EmailCheck(req.profile.email)) {
             IntUsers.findOne({ googleID: req.profile.id }).then((currentUser) => {
                 if (currentUser) {
-                    if (currentUser.hostelRoom != 'undefined') {
+                    if (!currentUser.hostelRoom) {
                         return currentUser.generateAuthToken();
                     } else {
                         var tkon = currentUser.generateAuthToken();
-                        res.redirect(`/intform?id=${tkon}&?state=${state}`);
+                        var s1 = encodeURIComponent(tkon);
+                        var s2 = encodeURIComponent(state);
+                        res.redirect('/intform?id=' + s1 + '&state=' + s2);
                     }
                 }
                 else {
@@ -27,7 +29,9 @@ router.get('/callback', exchangeCode, (req, res) => {
                     }).save().then((newUser) => {
                         console.log('created a newprofile:' + newUser);
                         var tkon = newUser.generateAuthToken();
-                        res.redirect(`/intform?id=${tkon}&?state=${state}`);
+                        var s1 = encodeURIComponent(tkon);
+                        var s2 = encodeURIComponent(state);
+                        res.redirect('/intform?id=' + s1 + '&state=' + s2);
 
                     });
                 }
@@ -38,11 +42,13 @@ router.get('/callback', exchangeCode, (req, res) => {
     else {
         ExtUsers.findOne({ googleID: req.profile.id }).then((currentUser) => {
             if (currentUser) {
-                if (currentUser.CollegeName != 'undefined') {
+                if (!currentUser.CollegeName) {
                     return currentUser.generateAuthToken();
                 } else {
                     var tkon = currentUser.generateAuthToken();
-                    res.redirect(`/extform?id=${tkon}&?state=${state}`);
+                    var s1 = encodeURIComponent(tkon);
+                    var s2 = encodeURIComponent(state);
+                    res.redirect('/extform?id=' + s1 + '&state=' + s2);
                 }
             }
             else {
@@ -54,7 +60,9 @@ router.get('/callback', exchangeCode, (req, res) => {
                 }).save().then((newUser) => {
                     console.log('created a newprofile:' + newUser);
                     var tkon = newUser.generateAuthToken();
-                    res.redirect(`/extform?id=${tkon}&?state=${state}`);
+                    var s1 = encodeURIComponent(tkon);
+                    var s2 = encodeURIComponent(state);
+                    res.redirect('/extform?id=' + s1 + '&state=' + s2);
 
                 });
 

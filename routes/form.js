@@ -2,22 +2,23 @@ const router = require('express').Router();
 const ExtUsers = require('../models/extUser');
 const IntUsers = require('../models/intUser');
 
+
 router.get('/intform', (req, res) => {
     var state = req.query.state
     var id = req.query.id
-    res.statusCode = 302;//partial redirect
-    res.setHeader("Location", `/getparinfo?id=${id}&?type=${state}`);
-    res.end();
+    var s1 = encodeURIComponent(id);
+    var s2 = encodeURIComponent(state);
     res.render('intform');
+    res.redirect('/getinfo?id=' + s1 + '&state=' + s2);
 
 });
 router.get('/extform', (req, res) => {
-    var type = req.query.state
+    var state = req.query.state
     var id = req.query.id
-    res.statusCode = 302;//partial redirect
-    res.setHeader("Location", `/getparinfo?id=${id}&?type=${state}`);
-    res.end();
+    var s1 = encodeURIComponent(id);
+    var s2 = encodeURIComponent(state);
     res.render('extform');
+    res.redirect('/getinfo?id=' + s1 + '&state=' + s2);
 });
 
 

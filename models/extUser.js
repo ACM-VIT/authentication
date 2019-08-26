@@ -11,13 +11,13 @@ var ExtUserSchema = new mongoose.Schema({
     CollegeName: {
         type: String,
         required: true,
-        default: `undefined`
+        //default: `undefined`
     },
     phno: {
         type: String,
         required: true,
         unique: true,
-        default: `undefined`
+        //default: `undefined`
     },
     email: {
         type: String,
