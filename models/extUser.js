@@ -50,6 +50,7 @@ ExtUserSchema.methods.generateAuthToken = function () {
     var user = this;
     var access = 'auth';
     var data = {
+        _id:user._id.toHexString(),
         email: user.email
     }
     var token = jwt.sign(data, 'abc123').toString();

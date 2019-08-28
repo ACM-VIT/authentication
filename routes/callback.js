@@ -6,14 +6,18 @@ const IntUsers = require('../models/intUser');
 router.get('/callback', exchangeCode, (req, res) => {
     console.log(req.refresh_token);
     var state = req.query.state;
+    var a;
     if (state == 'int') {
         if (!EmailCheck(req.profile.email)) {
             IntUsers.findOne({ googleID: req.profile.id }).then((currentUser) => {
                 if (currentUser) {
                     if (!currentUser.hostelRoom) {
-                        return currentUser.generateAuthToken();
+                        a = currentUser.generateAuthToken();
+                        console.log("jwt TOKEN is :",a);
                     } else {
                         var tkon = currentUser.generateAuthToken();
+                        a = currentUser.generateAuthToken();
+                        console.log(a);
                         var s1 = encodeURIComponent(tkon);
                         var s2 = encodeURIComponent(state);
                         res.redirect('/intform?id=' + s1 + '&state=' + s2);
@@ -31,6 +35,8 @@ router.get('/callback', exchangeCode, (req, res) => {
                         var tkon = newUser.generateAuthToken();
                         var s1 = encodeURIComponent(tkon);
                         var s2 = encodeURIComponent(state);
+                        a = currentUser.generateAuthToken();
+                        console.log("jwt TOKEN is :",a);
                         res.redirect('/intform?id=' + s1 + '&state=' + s2);
 
                     });
@@ -43,12 +49,16 @@ router.get('/callback', exchangeCode, (req, res) => {
         ExtUsers.findOne({ googleID: req.profile.id }).then((currentUser) => {
             if (currentUser) {
                 if (!currentUser.CollegeName) {
-                    return currentUser.generateAuthToken();
+                    a = currentUser.generateAuthToken();
+                    console.log("jwt TOKEN is :",a);
                 } else {
                     var tkon = currentUser.generateAuthToken();
                     var s1 = encodeURIComponent(tkon);
                     var s2 = encodeURIComponent(state);
+                    a = currentUser.generateAuthToken();
+                    console.log("jwt TOKEN is :",a);
                     res.redirect('/extform?id=' + s1 + '&state=' + s2);
+
                 }
             }
             else {
@@ -62,6 +72,8 @@ router.get('/callback', exchangeCode, (req, res) => {
                     var tkon = newUser.generateAuthToken();
                     var s1 = encodeURIComponent(tkon);
                     var s2 = encodeURIComponent(state);
+                    a = currentUser.generateAuthToken();
+                    console.log("jwt TOKEN is :",a);
                     res.redirect('/extform?id=' + s1 + '&state=' + s2);
 
                 });

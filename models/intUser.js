@@ -55,6 +55,7 @@ IntUserSchema.methods.generateAuthToken = function () {
     var user = this;
     var access = 'auth';
     var data = {
+        _id:user._id.toHexString(),
         email: user.email,
         regno: user.regno
     }

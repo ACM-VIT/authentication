@@ -12,13 +12,16 @@
     <!-- Compiled and minified JavaScript -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-    <script src="form.js"></script>
     <script src="main.js"></script>
     <title>Registration</title>
 </head>
 
 <body>
-
+    <div class="loader" style="display:none">
+        <center>
+            <img src="ajax-loader.gif">
+        </center>
+    </div>
     <form action="/extform">
         <div class="col s2">
             <h2 style="text-align:center">Form</h2>
@@ -61,12 +64,6 @@
                 <button id="show" class="btn red lighten-1" type="submit" name="action">SignUp
                     <i class="material-icons right">send</i>
                 </button>
-
-                <div class="loader" style="display:none">
-                    <center>
-                        <img src="ajax-loader.gif">
-                    </center>
-                </div>
             </div>
         </div>
     </div>
