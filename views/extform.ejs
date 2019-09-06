@@ -17,60 +17,61 @@
 </head>
 
 <body>
+    <%= name%>
+    <%= email%>
+    <img src="<%= picture%>" />
+    <input type="hidden" value='<%= token%>' id="token">
+    <!-- <form action="/extform"> -->
+    <div class="col s2">
+        <h2 style="text-align:center">Form</h2>
+    </div>
     <div class="loader" style="display:none">
         <center>
             <img src="ajax-loader.gif">
         </center>
     </div>
-    <form action="/extform">
-        <div class="col s2">
-            <h2 style="text-align:center">Form</h2>
-        </div>
-        <div class="row">
+    <!-- <ol id="alist" class="list"></ol> -->
+    <!-- <div class="row">
             <div class="col s15" style="margin-left:40%; margin-right:40%; margin-top:5%">
                 <div class="input-field inline">
                     <input id="name" type="text" class="validate">
-                    <label for="name">FullName</label>
+                    <label for="name">FullName
+                    </label>
                 </div>
             </div>
         </div>
-    </form>
-    </div>
+        </div> -->
     <div class="row">
         <div class="col s15" style="margin-left:40%; margin-right:40%">
             <div class="input-field inline" style="width:100%">
-                <input id="regno" type="text" class="validate">
-                <label for="regno">College Name</label>
+                <input id="collegename" type="text" class="validate" required="" aria-required="true">
+                <label for="collegename">College Name</label>
             </div>
         </div>
     </div>
-    </form>
-    </div>
-    <div class="row">
-        <div class="col s15" style="margin-left:40%; margin-right:40%">
-            <div class="input-field inline">
-                <input id="email" type="email" class="validate">
-                <label for="email">Email</label>
+
+    <!-- <div class="row">
+            <div class="col s15" style="margin-left:40%; margin-right:40%">
+                <div class="input-field inline">
+                    <input id="email" type="email" class="validate">
+                    <label for="email">Email</label>
+                </div>
             </div>
         </div>
-    </div>
-    </form>
-    </div>
+        </form> -->
     <div class="row">
         <div class="col s15" style="margin-left:40%; margin-right:40%">
             <div class="input-field inline">
-                <input id="phone" type="text" class="validate">
+                <input id="phone" type="text" class="validate" required="" aria-required="true">
                 <label for="phone">Phone No.</label>
-                <button id="show" class="btn red lighten-1" type="submit" name="action">SignUp
+                <button id="show" class="btn red lighten-1" name="action">Send
                     <i class="material-icons right">send</i>
                 </button>
             </div>
         </div>
     </div>
+    <!-- </form> -->
 
-
-    </div>
-    </form>
 </body>
 
 </html>

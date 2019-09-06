@@ -27,9 +27,9 @@ exchangeCode = async (req, res, next) => {
                 code: req.query.code,
                 redirect_uri: callback
             }
-        })
+    })
 
-        console.log(body)
+        // console.log('Body---->',body)
 
         data = await rp.get({
             url: 'https://www.googleapis.com/oauth2/v2/userinfo',
@@ -40,7 +40,7 @@ exchangeCode = async (req, res, next) => {
         })
 
         req.profile = data
-        console.log(req.profile);
+        console.log('Profile is ---->',req.profile);
         req.refresh_token = body.refresh_token
         next()
     } catch (e) {

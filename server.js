@@ -7,6 +7,7 @@ const form = require('./routes/form');
 const ejs = require('ejs');
 const getinfo = require('./routes/getinfo');
 const update = require('./routes/update');
+const getparinfo = require('./routes/getparinfo');
 var { mongoose } = require('./db/mongoose');
 
 
@@ -24,6 +25,7 @@ app.use('', auth);
 app.use('', callback);
 app.use('', form);
 app.use('', getinfo);
+app.use('', getparinfo);
 app.use('', update);
 
 app.listen(port, () => {

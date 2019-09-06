@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const validator = require('validator');
-const jwt = require('jsonwebtoken');
+
 
 var IntUserSchema = new mongoose.Schema({
     googleID: String,
@@ -17,12 +17,12 @@ var IntUserSchema = new mongoose.Schema({
         type: String,
         required: true,
         unique: true,
-        //default: `undefined`
+        default: ''
     },
     hostelRoom: {
         type: String,
         required: true,
-        //default: `undefined`
+        default: ''
     },
     refreshToken: {
         type: String
@@ -38,34 +38,13 @@ var IntUserSchema = new mongoose.Schema({
             message: '{value} is invalid email'
         }
     },
-    tokens: [{
-        access: {
-            type: String,
-            required: true
-        },
-        token: {
-            type: String,
-            required: true
-        }
-    }]
+    picture:{
+        type:String
+    }
 
 });
 
-IntUserSchema.methods.generateAuthToken = function () {
-    var user = this;
-    var access = 'auth';
-    var data = {
-        _id:user._id.toHexString(),
-        email: user.email,
-        regno: user.regno
-    }
-    var token = jwt.sign(data, 'abc123').toString();
-    this.tokens.push({ access, token });
-    return user.save().then(() => {
-        return token;
-    })
 
-};
 const IntUsers = mongoose.model('IntUsers', IntUserSchema);
 
 module.exports = IntUsers;
