@@ -1,7 +1,8 @@
 //const { clientSecret, clientID, callback } = require('./keys').google
 const rp = require('request-promise');
+
 // var callback = 'http://localhost:3000/callback';
-var callback = `http://localhost:${process.env.PORT}/callback`;
+
 
 getUrl = (state) => {
     console.log({ state })
@@ -10,7 +11,7 @@ getUrl = (state) => {
     url += `&scope=https://www.googleapis.com/auth/userinfo.profile+https://www.googleapis.com/auth/userinfo.email&`
     url += `&client_id=${process.env.GOOGLE_CLIENT_ID}`
     url += `&state=${state}`
-    url += `&redirect_uri=${callback}`
+    url += `&redirect_uri=${process.env.CALLBACK}`
     url += `&access_type=offline`
     url += `&prompt=consent`
     return url
@@ -26,7 +27,7 @@ exchangeCode = async (req, res, next) => {
                 client_secret: process.env.GOOGLE_CLIENT_SECRET,
                 grant_type: 'authorization_code',
                 code: req.query.code,
-                redirect_uri: callback
+                redirect_uri: process.env.CALLBACK
             }
         })
 
