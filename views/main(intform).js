@@ -4,7 +4,7 @@ $(function () {
         var hostelroom = $('#hostelroom').val();
         var phone = $('#phone').val();
         var token = $('#token').val();
-        console.log(hostelroom, phone, token)
+        // console.log(hostelroom, phone, token)
         $('.loader').show()
         $.ajax({
             type: 'POST',

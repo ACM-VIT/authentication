@@ -6,7 +6,7 @@ const jwt = require('jsonwebtoken');
 DecodeToken = function (token) {
     try {
         console.log(token)
-        decoded = jwt.verify(token, 'abc123');
+        decoded = jwt.verify(token, process.env.JWT_SECRET);
         return decoded;
     } catch (e) {
         console.log(e.message)
@@ -29,7 +29,6 @@ router.post('/update', (req, res) => {
                 if (updated) {
                     //return res.send(``);
                     console.log('Updated')
-                    res.send(updated);
                 }
                 else return res.statusCode(404).send();
             }).catch((e) => {
@@ -48,7 +47,6 @@ router.post('/update', (req, res) => {
                 if (updated) {
                     // return res.send(``);
                     console.log('Updated')
-                    res.send(updated);
                 }
                 else return res.statusCode(404).send();
             }).catch((e) => {

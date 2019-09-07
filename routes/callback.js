@@ -11,7 +11,7 @@ generate = function (user, state) {
         regno: user.regno,
         state
     }
-    var token = jwt.sign(data, 'abc123').toString();
+    var token = jwt.sign(data, process.env.JWT_SECRET).toString();
     return token;
 }
 
@@ -28,7 +28,8 @@ router.get('/callback', exchangeCode, (req, res) => {
                 if (currentUser.hostelRoom) {
                     var tkon = generate(currentUser, state);
                     res.json({ token: generate(currentUser, state) })
-                    
+                    //res.send(``);
+
                 } else {
                     var tkon = generate(currentUser, state);
                     res.redirect('/intform?id=' + tkon + '&state=' + state);
@@ -43,9 +44,7 @@ router.get('/callback', exchangeCode, (req, res) => {
                     regno: req.profile.family_name,
                     picture: req.profile.picture
                 }).save().then((newUser) => {
-                    //console.log('created a newprofile:' + newUser);
                     var tkon = generate(newUser, state);
-                    //console.log("jwt TOKEN is :", tkon);
                     res.redirect('/intform?id=' + tkon + '&state=' + state);
 
                 });
@@ -59,7 +58,6 @@ router.get('/callback', exchangeCode, (req, res) => {
                 if (currentUser.CollegeName) {
                     var tkon = generate(currentUser, state);
                     res.json({ token: generate(currentUser, state) })
-                    //console.log("jwt TOKEN is :", tkon);
                 } else {
                     var tkon = generate(currentUser, state);
                     res.redirect('/extform?id=' + tkon + '&state=' + state);
@@ -75,9 +73,7 @@ router.get('/callback', exchangeCode, (req, res) => {
                     name: req.profile.name,
                     picture: req.profile.picture
                 }).save().then((newUser) => {
-                    //console.log('created a newprofile:' + newUser);
                     var tkon = generate(newUser, state);
-                    //console.log("jwt TOKEN is :", tkon);
                     res.redirect('/extform?id=' + tkon + '&state=' + state);
 
                 });

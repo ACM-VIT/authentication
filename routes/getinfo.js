@@ -6,7 +6,7 @@ const jwt = require('jsonwebtoken');
 DecodeToken = function (token) {
     try {
         console.log(token)
-        decoded = jwt.verify(token, 'abc123');
+        decoded = jwt.verify(token, process.env.JWT_SECRET);
         return decoded;
     } catch (e) {
         console.log(e.message)
