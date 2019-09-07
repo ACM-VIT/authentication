@@ -1,6 +1,7 @@
 //const { clientSecret, clientID, callback } = require('./keys').google
 const rp = require('request-promise');
-var callback = 'http://localhost:3000/callback';
+// var callback = 'http://localhost:3000/callback';
+var callback = `${process.env.PORT}/callback`;
 
 getUrl = (state) => {
     console.log({ state })
