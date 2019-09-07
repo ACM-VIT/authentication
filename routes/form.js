@@ -1,5 +1,6 @@
 const router = require('express').Router();
 const rp = require('request-promise');
+const dotenv = require('dotenv').config();
 
 reqpost = function (req) {
     // console.log(111111111111,req.query.id)
@@ -7,7 +8,7 @@ reqpost = function (req) {
 
         var options = {
             method: 'POST',
-            uri: 'http://localhost:3000/getparinfo',
+            uri: `http://localhost:${process.env.PORT || 3000}/getparinfo`,
             body: {
                 'state': req.query.state,
                 'id': req.query.id
@@ -32,7 +33,7 @@ reqpost = function (req) {
 router.get('/intform', (req, res) => {
     reqpost(req).then(data => {
         // console.log(1111111, data)
-        res.render('intform', {...data,token:req.query.id});
+        res.render('intform', { ...data, token: req.query.id });
     });
 
 });
@@ -40,7 +41,7 @@ router.get('/intform', (req, res) => {
 router.get('/extform', (req, res) => {
     reqpost(req).then(data => {
         //console.log(1111111, data)
-        res.render('extform',{...data,token:req.query.id});
+        res.render('extform', { ...data, token: req.query.id });
     });
 });
 

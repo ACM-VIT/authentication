@@ -2,6 +2,7 @@ const router = require('express').Router();
 const ExtUsers = require('../models/extUser');
 const IntUsers = require('../models/intUser');
 const jwt = require('jsonwebtoken');
+const dotenv = require('dotenv').config();
 
 DecodeToken = function (token) {
     try {
