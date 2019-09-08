@@ -19,7 +19,7 @@ var IntUserSchema = new mongoose.Schema({
         unique: true,
         default: 'undefined'
     },
-    hostelRoom: {
+    hostelroom: {
         type: String,
         required: true,
         default: 'undefined'

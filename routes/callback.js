@@ -23,7 +23,7 @@ router.get('/callback', exchangeCode, (req, res) => {
         if (!EmailCheck(req.profile.email)) return res.json({ "Error message": "Use only VIT email ID! " });
         IntUsers.findOne({ googleID: req.profile.id }).then((currentUser) => {
             if (currentUser) {
-                if (currentUser.hostelRoom) {
+                if (currentUser.hostelroom) {
                     var tkon = generate(currentUser, state);
                     res.json({ token: generate(currentUser, state) })
                     //res.send(``);

@@ -20,7 +20,7 @@ router.post('/getinfo', (req, res) => {
     //console.log(deco);
     if (deco.state == 'int') {
         IntUsers.findOne({ "_id": deco._id }).then((user) => {
-            if (!user.regno) {
+            if (!user.hostelroom) {
                 console.log({ "Error message": "User not found in database", });
             }
             else {
