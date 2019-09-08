@@ -30,7 +30,7 @@ router.post('/update', (req, res) => {
                 if (updated) {
                     //return res.send(``);
                     console.log('--------Updated')
-                    res.json({'Updated':'True'});
+                    return res.json({'Updated':'True'});
                 }
                 else return res.statusCode(404).send();
             }).catch((e) => {
@@ -49,7 +49,7 @@ router.post('/update', (req, res) => {
                 if (updated) {
                     // return res.send(``);
                     console.log('-------Updated')
-                    res.json({'Updated':'True'});
+                    return res.json({'Updated':'True'});
                 }
                 else return res.statusCode(404).send();
             }).catch((e) => {
