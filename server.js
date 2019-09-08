@@ -26,11 +26,6 @@ app.use('', getinfo);
 app.use('', getparinfo);
 app.use('', update);
 
-console.log(process.env.GOOGLE_CLIENT_ID);
-console.log(process.env.GOOGLE_CLIENT_SECRET);
-console.log(process.env.MONGO_URI);
-console.log(process.env.JWT_SECRET);
-
 app.listen(port, () => {
     console.log(`Server is up at ${port}`);
 
