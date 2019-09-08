@@ -17,12 +17,12 @@ var IntUserSchema = new mongoose.Schema({
         type: String,
         required: true,
         unique: true,
-        default: ''
+        default: 'undefined'
     },
     hostelRoom: {
         type: String,
         required: true,
-        default: ''
+        default: 'undefined'
     },
     refreshToken: {
         type: String

@@ -12,7 +12,6 @@ $(function () {
             data: JSON.stringify({ collegename, phone, token })
         }).done(function () {
             return
-
         })
 
     })

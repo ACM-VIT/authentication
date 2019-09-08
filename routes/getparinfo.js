@@ -34,7 +34,7 @@ router.post('/getparinfo', (req, res) => {
         })
     }
     else {
-        ExtUsers.findOne({ "_id": deco }).then((user) => {
+        ExtUsers.findOne({ "_id": deco._id }).then((user) => {
             if (user) {
                 console.log(user)
                 console.log(111111111111111111111111)

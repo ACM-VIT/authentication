@@ -14,12 +14,12 @@ DecodeToken = function (token) {
         console.log('Error decoding token');
     }
 }
-router.get('/getinfo', (req, res) => {
+router.post('/getinfo', (req, res) => {
     var id = req.body.id;
     var deco = DecodeToken(id);
-    console.log(deco);
+    //console.log(deco);
     if (deco.state == 'int') {
-        IntUsers.findOne({ "_id": deco }).then((user) => {
+        IntUsers.findOne({ "_id": deco._id }).then((user) => {
             if (!user.regno) {
                 console.log({ "Error message": "User not found in database", });
             }
@@ -32,7 +32,7 @@ router.get('/getinfo', (req, res) => {
         })
     }
     else {
-        ExtUsers.findOne({ "_id": deco }).then((user) => {
+        ExtUsers.findOne({ "_id": deco._id }).then((user) => {
             if (!user.CollegeName) {
                 console.log({ "Error message": "User not found in database" });
             }
