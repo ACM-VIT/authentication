@@ -21,9 +21,9 @@ router.post('/getparinfo', (req, res) => {
     if (deco.state === 'int') {
         IntUsers.findOne({ "_id": deco._id }).then((user) => {
             if (user) {
-                console.log(user)
-                console.log(111111111111111111111111)
-                console.log()
+                // console.log(user)
+                // console.log(111111111111111111111111)
+                // console.log()
                 res.json(user);
             }
             else {
@@ -36,9 +36,9 @@ router.post('/getparinfo', (req, res) => {
     else {
         ExtUsers.findOne({ "_id": deco._id }).then((user) => {
             if (user) {
-                console.log(user)
-                console.log(111111111111111111111111)
-                console.log()
+                // console.log(user)
+                // console.log(111111111111111111111111)
+                // console.log()
                 res.json(user);
             }
             else {

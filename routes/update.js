@@ -18,7 +18,7 @@ DecodeToken = function (token) {
 router.post('/update', (req, res) => {
     console.log(777777777777, req.body)
     var dtok = DecodeToken(req.body.token);
-    console.log("update route dtok", dtok);
+    // console.log("update route dtok", dtok);
     if (dtok.state == 'int') {
         if (req.body.hostelroom) {
             IntUsers.findByIdAndUpdate(dtok._id, {
@@ -29,7 +29,8 @@ router.post('/update', (req, res) => {
             }, { new: true }).then((updated) => {
                 if (updated) {
                     //return res.send(``);
-                    console.log('Updated')
+                    console.log('--------Updated')
+                    res.json({'Updated':'True'});
                 }
                 else return res.statusCode(404).send();
             }).catch((e) => {
@@ -47,7 +48,8 @@ router.post('/update', (req, res) => {
             }, { new: true }).then((updated) => {
                 if (updated) {
                     // return res.send(``);
-                    console.log('Updated')
+                    console.log('-------Updated')
+                    res.json({'Updated':'True'});
                 }
                 else return res.statusCode(404).send();
             }).catch((e) => {
