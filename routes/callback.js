@@ -25,8 +25,12 @@ router.get('/callback', exchangeCode, (req, res) => {
             if (currentUser) {
                 if (currentUser.hostelroom) {
                     var tkon = generate(currentUser, state);
-                    res.json({ token: generate(currentUser, state) })
-                    //res.send(``);
+                    res.send(`
+                    <script>
+                    opener.postMessage({type:'token',token:'${generate(currentUser, state)}'},"*");
+                    window.close();
+                    </script>
+                    `);
 
                 } else {
                     var tkon = generate(currentUser, state);
@@ -55,7 +59,12 @@ router.get('/callback', exchangeCode, (req, res) => {
             if (currentUser) {
                 if (currentUser.CollegeName) {
                     var tkon = generate(currentUser, state);
-                    res.json({ token: generate(currentUser, state) })
+                    res.send(`
+                    <script>
+                    opener.postMessage({type:'token',token:'${generate(currentUser, state)}'},"*");
+                    window.close();
+                    </script>
+                    `);
                 } else {
                     var tkon = generate(currentUser, state);
                     res.redirect('/extform?id=' + tkon + '&state=' + state);
