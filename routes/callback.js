@@ -27,7 +27,7 @@ router.get('/callback', exchangeCode, (req, res) => {
                     var tkon = generate(currentUser, state);
                     res.send(`
                     <script>
-                    opener.postMessage({type:'token',token:'${generate(currentUser, state)}'},"*");
+                    window.opener.postMessage({type:'token',token:'${generate(currentUser, state)}'},"*");
                     window.close();
                     </script>
                     `);
@@ -61,7 +61,7 @@ router.get('/callback', exchangeCode, (req, res) => {
                     var tkon = generate(currentUser, state);
                     res.send(`
                     <script>
-                    opener.postMessage({type:'token',token:'${generate(currentUser, state)}'},"*");
+                    window.opener.postMessage({type:'token',token:'${generate(currentUser, state)}'},"*");
                     window.close();
                     </script>
                     `);

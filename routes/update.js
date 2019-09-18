@@ -30,13 +30,13 @@ router.post('/update', (req, res) => {
                 if (updated) {
                     //return res.send(``);
                     console.log('--------Updated')
-                    res.send(`
+                    return res.send(`
                     <script>
-                    opener.postMessage({type:'token',token:'${generate(currentUser, state)}'},"*");
+                    window.opener.postMessage({type:'token',token:'${generate(currentUser, state)}'},"*");
                     window.close();
                     </script>
                     `);
-                    return res.json({ 'Updated': 'True' });
+                    //return res.json({ 'Updated': 'True' });
 
                 }
                 else return res.statusCode(404).send();
@@ -56,13 +56,13 @@ router.post('/update', (req, res) => {
                 if (updated) {
                     // return res.send(``);
                     console.log('-------Updated')
-                    res.send(`
+                    return res.send(`
                     <script>
-                    opener.postMessage({type:'token',token:'${generate(currentUser, state)}'},"*");
+                    window.opener.postMessage({type:'token',token:'${generate(currentUser, state)}'},"*");
                     window.close();
                     </script>
                     `);
-                    return res.json({ 'Updated': 'True' });
+                    //return res.json({ 'Updated': 'True' });
                 }
                 else return res.statusCode(404).send();
             }).catch((e) => {
