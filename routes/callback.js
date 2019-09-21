@@ -8,8 +8,8 @@ const dotenv = require('dotenv').config();
 generate = function (user, state) {
     var data = {
         _id: user._id.toHexString(),
+        name: user.name,
         email: user.email,
-        regno: user.regno,
         state
     }
     var token = jwt.sign(data, process.env.JWT_SECRET).toString();

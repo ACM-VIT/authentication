@@ -8,7 +8,7 @@ reqpost = function (req) {
 
         var options = {
             method: 'POST',
-            uri: `http://localhost:${process.env.PORT || 3000}/getparinfo`,
+            uri: `http://localhost:${process.env.PORT || 3000}/getinfo`,
             body: {
                 'state': req.query.state,
                 'id': req.query.id
