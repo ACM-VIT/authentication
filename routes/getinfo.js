@@ -25,7 +25,7 @@ router.get('/getinfo', (req, res) => {
             }
             else {
                 console.log(user);
-                res.json(user);
+                return res.json(user);
             }
         }).catch((err) => {
             console.log('Error in getinfo route', err);
@@ -38,7 +38,7 @@ router.get('/getinfo', (req, res) => {
             }
             else {
                 console.log(user);
-                res.json(user);
+                return res.json(user);
             }
         }).catch((err) => {
             console.log('Error in getinfo route', err);
