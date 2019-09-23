@@ -17,7 +17,6 @@ DecodeToken = function (token) {
 router.get('/getparinfo', (req, res) => {
     var id = req.body.id;
     var deco = DecodeToken(id);
-    // console.log(deco);
     if (deco.state === 'int') {
         IntUsers.findOne({ "_id": deco._id }).then((user) => {
             if (user) {

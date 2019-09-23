@@ -17,15 +17,15 @@ DecodeToken = function (token) {
 router.all('/getinfo', (req, res) => {
     var id = req.body.id;
     var deco = DecodeToken(id);
-    //console.log(deco);
     if (deco.state == 'int') {
         IntUsers.findOne({ "_id": deco._id }).then((user) => {
-            if (!user.hostelroom) {
-                console.log({ "Error message": "User not found in database", });
+            if (user.hostelroom) {
+                console.log(user);
+                return res.json(user);
+
             }
             else {
-                //console.log(user);
-                return res.json(user);
+                console.log({ "Error message": "User not found in database", });
             }
         }).catch((err) => {
             console.log('Error in getinfo route', err);
@@ -33,12 +33,13 @@ router.all('/getinfo', (req, res) => {
     }
     else {
         ExtUsers.findOne({ "_id": deco._id }).then((user) => {
-            if (!user.CollegeName) {
-                console.log({ "Error message": "User not found in database" });
+            if (user.CollegeName) {
+                console.log(user);
+                return res.json(user);
+
             }
             else {
-                //console.log(user);
-                return res.json(user);
+                console.log({ "Error message": "User not found in database" });
             }
         }).catch((err) => {
             console.log('Error in getinfo route', err);
