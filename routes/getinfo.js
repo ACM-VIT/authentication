@@ -14,7 +14,7 @@ DecodeToken = function (token) {
         console.log('Error decoding token');
     }
 }
-router.get('/getinfo', (req, res) => {
+router.all('/getinfo', (req, res) => {
     var id = req.body.id;
     var deco = DecodeToken(id);
     //console.log(deco);
