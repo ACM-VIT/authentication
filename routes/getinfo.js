@@ -24,7 +24,7 @@ router.all('/getinfo', (req, res) => {
                 console.log({ "Error message": "User not found in database", });
             }
             else {
-                console.log(user);
+                //console.log(user);
                 return res.json(user);
             }
         }).catch((err) => {
@@ -37,7 +37,7 @@ router.all('/getinfo', (req, res) => {
                 console.log({ "Error message": "User not found in database" });
             }
             else {
-                console.log(user);
+                //console.log(user);
                 return res.json(user);
             }
         }).catch((err) => {
