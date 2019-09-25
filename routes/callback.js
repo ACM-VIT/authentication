@@ -10,7 +10,7 @@ generate = function (user, state) {
         _id: user._id.toHexString(),
         name: user.name,
         email: user.email,
-        state
+        state: state
     }
     var token = jwt.sign(data, process.env.JWT_SECRET).toString();
     return token;

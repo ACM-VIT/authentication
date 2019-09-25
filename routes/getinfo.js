@@ -19,7 +19,7 @@ router.all('/getinfo', (req, res) => {
     var deco = DecodeToken(id);
     if (deco.state == 'int') {
         IntUsers.findOne({ "_id": deco._id }).then((user) => {
-            if (user.hostelroom) {
+            if (user.hostelroom != '') {
                 console.log(user);
                 return res.json(user);
 
@@ -33,7 +33,7 @@ router.all('/getinfo', (req, res) => {
     }
     else {
         ExtUsers.findOne({ "_id": deco._id }).then((user) => {
-            if (user.CollegeName) {
+            if (user.CollegeName != '') {
                 console.log(user);
                 return res.json(user);
 
