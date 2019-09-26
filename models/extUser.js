@@ -17,7 +17,8 @@ var ExtUserSchema = new mongoose.Schema({
         type: String,
         required: true,
         unique: true,
-        default: `undefined`
+        default: `undefined`,
+        maxlength=10
     },
     email: {
         type: String,
@@ -33,8 +34,8 @@ var ExtUserSchema = new mongoose.Schema({
     refreshToken: {
         type: String
     },
-    picture:{
-        type:String
+    picture: {
+        type: String
     }
 });
 
