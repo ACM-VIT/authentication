@@ -30,13 +30,14 @@ router.post('/update', (req, res) => {
                 if (updated) {
                     //return res.send(``);
                     console.log('--------Updated')
-                    return res.send(`
-                    <script>
-                    window.opener.postMessage({type:'token',token:'${req.body.token}'},"*");
-                    window.close();
-                    </script>
-                    `);
-                    //return res.json({ 'Updated': 'True' });
+                    return res.json({ 'token': req.body.token })
+                    // return res.send(`
+                    // <script>
+                    // window.opener.postMessage({type:'token',token:'${req.body.token}'},"*");
+                    // window.close();
+                    // </script>
+                    // `);
+
 
                 }
                 else return res.statusCode(404).send();
@@ -61,7 +62,7 @@ router.post('/update', (req, res) => {
                     window.close();
                     </script>
                     `);
-                    
+
                 }
                 else return res.statusCode(404).send();
             }).catch((e) => {

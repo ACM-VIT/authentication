@@ -11,8 +11,14 @@ $(function () {
             url: '/update',
             contentType: 'application/json',
             data: JSON.stringify({ hostelroom, phone, token })
-        }).done(function () {
-            return 
+        }).done(function (token) {
+            return res.send(`
+            <script>
+            window.opener.postMessage({type:'token',token:'${token}'},"*");
+            window.close();
+            </script>
+            `);
+
         })
 
     })
