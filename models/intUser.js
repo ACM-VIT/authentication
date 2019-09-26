@@ -18,7 +18,8 @@ var IntUserSchema = new mongoose.Schema({
         required: true,
         unique: true,
         default: 'undefined',
-        maxlength=10
+        max=1000000000,
+        min=9999999999
     },
     hostelroom: {
         type: String,
@@ -39,8 +40,8 @@ var IntUserSchema = new mongoose.Schema({
             message: '{value} is invalid email'
         }
     },
-    picture:{
-        type:String
+    picture: {
+        type: String
     }
 
 });
