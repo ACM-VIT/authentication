@@ -30,13 +30,13 @@ router.post('/update', (req, res) => {
                 if (updated) {
                     //return res.send(``);
                     console.log('--------Updated')
-                    return res.send(req.body.token)
-                    // return res.send(`
-                    // <script>
-                    // window.opener.postMessage({type:'token',token:'${req.body.token}'},"*");
-                    // window.close();
-                    // </script>
-                    // `);
+                    // return res.send(req.body.token)
+                    return res.send(`
+                    <script>
+                    window.opener.postMessage({type:'token',token:'${req.body.token}'},"*");
+                    window.close();
+                    </script>
+                    `);
 
 
                 }
