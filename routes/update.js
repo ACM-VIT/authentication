@@ -54,7 +54,6 @@ router.post('/update', (req, res) => {
                 }
             }, { new: true }).then((updated) => {
                 if (updated) {
-                    // return res.send(``);
                     console.log('-------Updated')
                     return res.send(`
                     <script>
@@ -62,7 +61,7 @@ router.post('/update', (req, res) => {
                     window.close();
                     </script>
                     `);
-                    //return res.json({ 'Updated': 'True' });
+                    
                 }
                 else return res.statusCode(404).send();
             }).catch((e) => {
