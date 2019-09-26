@@ -18,7 +18,7 @@ var ExtUserSchema = new mongoose.Schema({
         required: true,
         unique: true,
         default: `undefined`,
-        maxlength=10
+        
     },
     email: {
         type: String,
