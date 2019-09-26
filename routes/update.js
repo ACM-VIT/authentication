@@ -31,13 +31,7 @@ router.post('/update', (req, res) => {
                     //return res.send(``);
                     console.log('--------Updated')
                     // return res.send(req.body.token)
-                    return res.send(`
-                    <script>
-                    window.opener.postMessage({type:'token',token:'${req.body.token}'},"*");
-                    window.close();
-                    </script>
-                    `);
-
+                    return res.send(req.body.token)
 
                 }
                 else return res.statusCode(404).send();
