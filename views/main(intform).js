@@ -12,7 +12,13 @@ $(function () {
             contentType: 'application/json',
             data: JSON.stringify({ hostelroom, phone, token })
         }).done(function (token) {
-            return token
+            return 
+            `
+            <script>
+            window.opener.postMessage({type:'token',token:'${token}'},"*");
+            window.close();
+            </script>
+            `
 
         })
 
