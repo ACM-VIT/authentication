@@ -32,7 +32,7 @@ router.post('/update', (req, res) => {
                     console.log('--------Updated')
                     return res.send(`
                     <script>
-                    window.opener.postMessage({type:'token',token:'${generate(currentUser, state)}'},"*");
+                    window.opener.postMessage({type:'token',token:'${req.body.token}'},"*");
                     window.close();
                     </script>
                     `);
