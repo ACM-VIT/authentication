@@ -1,14 +1,5 @@
 
 $(function () {
-    $("#phone").validate({
-        rules: {
-            phone: {
-                required: true,
-                minlength: 10,
-                maxlength: 10
-            }
-        }
-    })
     $('#show').click(function () {
         var hostelroom = $('#hostelroom').val();
         var phone = $('#phone').val();
