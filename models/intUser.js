@@ -17,9 +17,7 @@ var IntUserSchema = new mongoose.Schema({
         type: String,
         required: true,
         unique: true,
-        default: 'undefined',
-        max=1000000000,
-        min=9999999999
+        default: 'undefined'
     },
     hostelroom: {
         type: String,
