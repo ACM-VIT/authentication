@@ -10,7 +10,8 @@ generate = function (user, state) {
         _id: user._id.toHexString(),
         name: user.name,
         email: user.email,
-        state: state
+        state: state,
+        picture: user.picture
     }
     var token = jwt.sign(data, process.env.JWT_SECRET).toString();
     return token;
@@ -23,31 +24,39 @@ router.get('/callback', exchangeCode, (req, res) => {
         if (!EmailCheck(req.profile.email)) return res.json({ "Error message": "Use only VIT email ID! " });
         IntUsers.findOne({ googleID: req.profile.id }).then((currentUser) => {
             if (currentUser) {
-                if (currentUser.hostelroom) {
+                // if (currentUser.hostelroom) {
                     var tkon = generate(currentUser, state);
                     res.send(`
                     <script>
-                    window.opener.postMessage({type:'token',token:'${generate(currentUser, state)}'},"*");
+                    window.opener.postMessage({type:'token',token:'${tkon}'},"*");
                     window.close();
                     </script>
                     `);
 
-                } else {
-                    var tkon = generate(currentUser, state);
-                    res.redirect('/intform?id=' + tkon + '&state=' + state);
-                }
+                // } else {
+                //     var tkon = generate(currentUser, state);
+                //     res.redirect('/intform?id=' + tkon + '&state=' + state);
+                // }
             }
             else {
                 new IntUsers({
-                    googleID: req.profile.id,
-                    refreshToken: req.refresh_token,
-                    email: req.profile.email,
-                    name: req.profile.given_name,
-                    regno: req.profile.family_name,
-                    picture: req.profile.picture
+                    googleID: req.profile.id || '',
+                    refreshToken: req.refresh_token || '',
+                    email: req.profile.email || '',
+                    name: req.profile.given_name || '',
+                    regno: req.profile.family_name || '',
+                    picture: req.profile.picture || ''
                 }).save().then((newUser) => {
                     var tkon = generate(newUser, state);
-                    res.redirect('/intform?id=' + tkon + '&state=' + state);
+                    // res.redirect('/intform?id=' + tkon + '&state=' + state);
+
+                    // Del once octave done
+                    res.send(`
+                    <script>
+                    window.opener.postMessage({type:'token',token:'${tkon}'},"*");
+                    window.close();
+                    </script>
+                    `);
 
                 });
             }
@@ -57,7 +66,7 @@ router.get('/callback', exchangeCode, (req, res) => {
     else {
         ExtUsers.findOne({ googleID: req.profile.id }).then((currentUser) => {
             if (currentUser) {
-                if (currentUser.CollegeName) {
+                // if (currentUser.CollegeName) {
                     var tkon = generate(currentUser, state);
                     res.send(`
                     <script>
@@ -65,23 +74,32 @@ router.get('/callback', exchangeCode, (req, res) => {
                     window.close();
                     </script>
                     `);
-                } else {
-                    var tkon = generate(currentUser, state);
-                    res.redirect('/extform?id=' + tkon + '&state=' + state);
+                // } else {
+                //     var tkon = generate(currentUser, state);
+                //     res.redirect('/extform?id=' + tkon + '&state=' + state);
 
-                }
+                // }
             }
             else {
                 // console.log(6666666666666, req.profile)
                 new ExtUsers({
-                    googleID: req.profile.id,
-                    refreshToken: req.refresh_token,
-                    email: req.profile.email,
-                    name: req.profile.name,
-                    picture: req.profile.picture
+                    googleID: req.profile.id || '',
+                    refreshToken: req.refresh_token || '',
+                    email: req.profile.email || '',
+                    name: req.profile.name || '',
+                    picture: req.profile.picture || ''
                 }).save().then((newUser) => {
                     var tkon = generate(newUser, state);
-                    res.redirect('/extform?id=' + tkon + '&state=' + state);
+                    // res.redirect('/extform?id=' + tkon + '&state=' + state);
+
+                    // Del once octave done
+                    res.send(`
+                    <script>
+                    window.opener.postMessage({type:'token',token:'${tkon}'},"*");
+                    window.close();
+                    </script>
+                    `);
+                    //--
 
                 });
 
