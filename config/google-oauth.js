@@ -15,6 +15,7 @@ getUrl = (state) => {
     url += `&redirect_uri=${process.env.CALLBACK}`
     url += `&access_type=offline`
     url += `&prompt=consent`
+    if(state=='int') url += `&hd=vitstudent.ac.in`
     return url
 }
 
