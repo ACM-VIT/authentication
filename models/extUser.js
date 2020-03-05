@@ -10,21 +10,14 @@ var ExtUserSchema = new mongoose.Schema({
     },
     CollegeName: {
         type: String,
-        required: true,
-        default: `undefined`
     },
     phno: {
         type: String,
-        required: true,
-        unique: true,
-        default: `undefined`
-        
     },
     email: {
         type: String,
         required: true,
         minlength: 1,
-        unique: true,
         trim: true,
         validate: {
             validator: validator.isEmail,

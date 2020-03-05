@@ -10,20 +10,12 @@ var IntUserSchema = new mongoose.Schema({
     },
     regno: {
         type: String,
-        required: true,
-        unique: true
     },
     phno: {
         type: String,
-        required: true,
-        unique: true,
-        default: 'undefined ',
-        minlength: 10
     },
     hostelroom: {
         type: String,
-        required: true,
-        default: 'undefined'
     },
     refreshToken: {
         type: String
@@ -32,7 +24,6 @@ var IntUserSchema = new mongoose.Schema({
         type: String,
         required: true,
         minlength: 1,
-        unique: true,
         trim: true,
         validate: {
             validator: validator.isEmail,
