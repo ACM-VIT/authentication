@@ -111,7 +111,7 @@ router.get('/callback', exchangeCode, (req, res) => {
 });
 
 function EmailCheck(str) {
-    var exp = /^[a-zA-Z]+\.[a-zA-Z]*201[6789]\@vitstudent.ac.in$/;
+    var exp = /@vitstudent.ac.in/;
     return exp.test(str)
 }
 
